@@ -10,14 +10,27 @@ let scrape = async () => {
   // const kyungdaeAptFrontBusData = [];
 
   const kyungdaeAptCornerResult = await kyungdaeAptCorner.evaluate(() => {
-    const kyungdaeAptCornerStatus = document.querySelector('#ct > div.dp > div > h3').innerText;
+    // const kyungdaeAptCornerStatus = document.querySelector('#ct > div.dp > div > h3').innerText;
     const busses = document.querySelectorAll('#ct > div.dp > ul li');
-    const kyungdaeAptCornerBusData = [];
+    let kyungdaeAptCornerBusData = {
+      busStopNameAndStatus: document.querySelector('#ct > div.dp > div > h3').innerText,
+      busses: []
+    };
 
-    kyungdaeAptCornerBusData.push(kyungdaeAptCornerStatus);
+    // kyungdaeAptCornerBusData.busStopNameAndStatus = kyungdaeAptCornerStatus;
 
     for (let bus of busses) {
-      kyungdaeAptCornerBusData.push(bus.outerHTML);
+      // kyungdaeAptCornerBusData.busses.push(bus.outerHTML);
+
+      let currBus = {
+        routeNo: bus.childNodes[0].textContent,
+        arrState: bus.childNodes[1].textContent,
+        currPos: bus.childNodes[2].textContent,
+        urgent: bus.outerHTML.match(/class="st"/) ? true : false // check the outerHTML string for a unique class for a nearby bus and style red later
+      }
+
+      kyungdaeAptCornerBusData.busses.push(currBus);
+
     }
 
     return kyungdaeAptCornerBusData;
