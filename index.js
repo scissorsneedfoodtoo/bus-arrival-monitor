@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
-
-const kyungdaeAptCorner = 'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA';
-const kyungdaeAptFront = 'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5';
-
-busArrivalInfo = [];
+const busStopURLs = [
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
+]
+const busArrivalInfo = [];
 
 async function scrape(url) {
   const browser = await puppeteer.launch();
@@ -38,8 +38,13 @@ async function scrape(url) {
   return busArrivalInfo.push(results);
 }
 
-scrape(kyungdaeAptCorner).then(() => {
-  return scrape(kyungdaeAptFront)
-}).then(() => {
-  console.log(busArrivalInfo)
-})
+// consider using an npm package(https://github.com/caolan/async) to make this more verbose
+async function run() {
+  await Promise.all(busStopURLs.map((url) => {
+    return scrape(url);
+  }));
+}
+
+run().then(() => {
+  console.log(busArrivalInfo);
+});
