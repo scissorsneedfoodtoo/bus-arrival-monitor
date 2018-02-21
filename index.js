@@ -10,7 +10,8 @@ async function scrape(url) {
   const page = await browser.newPage();
   await page.goto(url);
 
-  const results = await page.evaluate(() => {
+  const constructBusStopObj = await page.evaluate(() => {
+    // fetches a NodeList of busses that are scheduled to arrive
     const busses = document.querySelectorAll('#ct > div.dp > ul li');
 
     let busStopObj = {
@@ -18,6 +19,7 @@ async function scrape(url) {
       busses: []
     };
 
+    // loop through the busses NodeList and create an object for each bus
     for (let bus of busses) {
       let currBus = {
         routeNo: bus.childNodes[0].textContent,
@@ -26,16 +28,17 @@ async function scrape(url) {
         urgent: bus.outerHTML.match(/class="st"/) ? true : false // check the outerHTML string for a unique class for a nearby bus and style red later
       };
 
+      // push the bus object to the busses array of busStopObj
       busStopObj.busses.push(currBus);
-    }
+    } // end for bus of busses
 
     return busStopObj;
-  });
+  }); // end constructBusStopObj
 
   await page.close();
   await browser.close();
 
-  return busArrivalInfo.push(results);
+  busArrivalInfo.push(constructBusStopObj);
 }
 
 // consider using an npm package(https://github.com/caolan/async) to make this more verbose
