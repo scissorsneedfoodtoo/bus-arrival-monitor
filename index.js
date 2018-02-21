@@ -1,11 +1,10 @@
 const puppeteer = require('puppeteer');
-const async = require('async');
 
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
 ]
-const busArrivalInfo = [];
+let busArrivalInfo = [];
 
 async function scrape(url) {
   const browser = await puppeteer.launch();
@@ -51,30 +50,35 @@ function compareBusStopNames(a, b) {
   }
 }
 
-// async.forEachOf(busStopURLs, function (url, key, callback) {
-//   try {
-//     scrape(url).then(() => {
-//       callback();
-//     });
-//   } catch (e) {
-//     return callback(e);
-//   }
-// }, function (err) {
-//   if (err) console.error(err.message);
-//   // console.log(busArrivalInfo)
-//   busArrivalInfo.forEach((obj) => {
-//     console.log(obj);
-//   })
-// });
+async function runAsync() {
+  // clear busArrivalInfo if this is not the first time the program is running
+  busArrivalInfo = [];
 
-// consider using an npm package(https://github.com/caolan/async) to make this more verbose
-async function run() {
   await Promise.all(busStopURLs.map((url) => {
     return scrape(url);
   }));
 }
 
-run().then(() => {
-  const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
-  console.log(orderedBusArrivalInfo);
-});
+// function execute() {
+//   runAsync().then(() => {
+//     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
+//     console.log(orderedBusArrivalInfo);
+//   });
+// }
+//
+// setInterval(execute, 10 * 1000);
+//
+// execute();
+
+function executeAndSetTimeout() {
+  runAsync().then(() => {
+    const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
+
+    // Do stuff here!
+    console.log(orderedBusArrivalInfo);
+  });
+
+  return setTimeout(executeAndSetTimeout, 20 * 1000);
+}
+
+executeAndSetTimeout();
