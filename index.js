@@ -43,29 +43,38 @@ async function scrape(url) {
   busArrivalInfo.push(constructBusStopObj);
 }
 
-// // consider using an npm package(https://github.com/caolan/async) to make this more verbose
-// async function run() {
-//   await Promise.all(busStopURLs.map((url) => {
-//     return scrape(url);
-//   }));
-// }
-//
-// run().then(() => {
-//   console.log(busArrivalInfo);
+function compareBusStopNames(a, b) {
+  if (a.busStopNameAndStatus.indexOf('경대아파트건너') > 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+// async.forEachOf(busStopURLs, function (url, key, callback) {
+//   try {
+//     scrape(url).then(() => {
+//       callback();
+//     });
+//   } catch (e) {
+//     return callback(e);
+//   }
+// }, function (err) {
+//   if (err) console.error(err.message);
+//   // console.log(busArrivalInfo)
+//   busArrivalInfo.forEach((obj) => {
+//     console.log(obj);
+//   })
 // });
 
-async.forEachOf(busStopURLs, function (url, key, callback) {
-  try {
-    scrape(url).then(() => {
-      callback();
-    });
-  } catch (e) {
-    return callback(e);
-  }
-}, function (err) {
-  if (err) console.error(err.message);
-  // console.log(busArrivalInfo)
-  busArrivalInfo.forEach((obj) => {
-    console.log(obj);
-  })
+// consider using an npm package(https://github.com/caolan/async) to make this more verbose
+async function run() {
+  await Promise.all(busStopURLs.map((url) => {
+    return scrape(url);
+  }));
+}
+
+run().then(() => {
+  const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
+  console.log(orderedBusArrivalInfo);
 });
