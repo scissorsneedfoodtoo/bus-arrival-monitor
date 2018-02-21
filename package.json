@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/scissorsneedfoodtoo/bus-arrival-monitor#readme",
   "dependencies": {
+    "async": "^2.6.0",
     "puppeteer": "^1.1.0"
   }
 }

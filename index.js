@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+const async = require('async');
+
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
@@ -41,13 +43,29 @@ async function scrape(url) {
   busArrivalInfo.push(constructBusStopObj);
 }
 
-// consider using an npm package(https://github.com/caolan/async) to make this more verbose
-async function run() {
-  await Promise.all(busStopURLs.map((url) => {
-    return scrape(url);
-  }));
-}
+// // consider using an npm package(https://github.com/caolan/async) to make this more verbose
+// async function run() {
+//   await Promise.all(busStopURLs.map((url) => {
+//     return scrape(url);
+//   }));
+// }
+//
+// run().then(() => {
+//   console.log(busArrivalInfo);
+// });
 
-run().then(() => {
-  console.log(busArrivalInfo);
+async.forEachOf(busStopURLs, function (url, key, callback) {
+  try {
+    scrape(url).then(() => {
+      callback();
+    });
+  } catch (e) {
+    return callback(e);
+  }
+}, function (err) {
+  if (err) console.error(err.message);
+  // console.log(busArrivalInfo)
+  busArrivalInfo.forEach((obj) => {
+    console.log(obj);
+  })
 });
