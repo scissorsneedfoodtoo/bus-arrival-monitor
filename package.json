@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "node index.js"
+    "test": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/scissorsneedfoodtoo/bus-arrival-monitor#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "file-system": "^2.2.2",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "pug": "^2.0.0-rc.4",
