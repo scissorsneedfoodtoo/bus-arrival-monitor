@@ -64,23 +64,13 @@ async function runAsync() {
   }));
 }
 
-// function execute() {
-//   runAsync().then(() => {
-//     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
-//     console.log(orderedBusArrivalInfo);
-//   });
-// }
-//
-// setInterval(execute, 10 * 1000);
-//
-// execute();
-
 function executeAndSetTimeout() {
   runAsync().then(() => {
     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
 
     // Do stuff here!
-    console.log(orderedBusArrivalInfo);
+    // console.log(orderedBusArrivalInfo);
+    return orderedBusArrivalInfo;
   });
 
   return setTimeout(executeAndSetTimeout, 20 * 1000);
