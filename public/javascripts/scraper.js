@@ -20,7 +20,6 @@ async function scrape(url) {
   const constructBusStopObj = await page.evaluate(() => {
     // fetches a NodeList of busses that are scheduled to arrive
     const busses = document.querySelectorAll('#ct > div.dp > ul li');
-    // const noBussesCheck = document.querySelector('#ct > div.dp > ul > li > span') === '버스운행시간이 아닙니다.';
     const bussesRunning = busses[0].textContent !== '버스운행시간이 아닙니다.';
 
     let busStopObj = {

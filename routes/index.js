@@ -4,9 +4,10 @@ const puppeteer = require('puppeteer');
 const fs = require('file-system');
 const scraper = require('../public/javascripts/scraper.js');
 
+scraper.beginScraping();
+
 /* GET home page */
 router.get('/', function (req, res, next) {
-  scraper.beginScraping();
   res.render('index', { title: 'Bus Arrival Info Service' });
 });
 
