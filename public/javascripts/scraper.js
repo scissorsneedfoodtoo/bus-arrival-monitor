@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const fs = require('file-system');
 
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
@@ -20,14 +21,14 @@ async function scrape(url) {
     // fetches a NodeList of busses that are scheduled to arrive
     const busses = document.querySelectorAll('#ct > div.dp > ul li');
     // const noBussesCheck = document.querySelector('#ct > div.dp > ul > li > span') === '버스운행시간이 아닙니다.';
-    const noBussesCheck = busses[0].textContent === '버스운행시간이 아닙니다.';
+    const bussesRunning = busses[0].textContent !== '버스운행시간이 아닙니다.';
 
     let busStopObj = {
       busStopNameAndStatus: document.querySelector('#ct > div.dp > div > h3').innerText,
       busses: []
     };
 
-    if (!noBussesCheck) {
+    if (bussesRunning) {
       // loop through the busses NodeList and create an object for each bus
       for (let bus of busses) {
         let currBus = {
@@ -68,16 +69,21 @@ async function runAsync() {
   }));
 }
 
-function executeAndSetTimeout() {
+const executeAndSetTimeout = () => {
   runAsync().then(() => {
     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
 
     // Do stuff here!
     console.log(orderedBusArrivalInfo);
     // return orderedBusArrivalInfo;
+    return fs.writeFile('public/data/busStopData.json', JSON.stringify(orderedBusArrivalInfo), (err) => {
+      if (err) throw err;
+    });
   });
 
   return setTimeout(executeAndSetTimeout, 20 * 1000);
 }
 
-executeAndSetTimeout();
+module.exports = {
+  beginScraping: executeAndSetTimeout
+}
