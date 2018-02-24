@@ -74,13 +74,12 @@ const executeAndSetTimeout = () => {
 
     // Do stuff here!
     console.log(orderedBusArrivalInfo);
-    // return orderedBusArrivalInfo;
     return fs.writeFile('public/data/busStopData.json', JSON.stringify(orderedBusArrivalInfo), (err) => {
       if (err) throw err;
     });
   });
 
-  return setTimeout(executeAndSetTimeout, 20 * 1000);
+  return setTimeout(executeAndSetTimeout, 30 * 1000);
 }
 
 module.exports = {

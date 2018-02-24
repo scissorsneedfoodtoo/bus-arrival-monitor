@@ -1,4 +1,4 @@
-// const busStopData = '/data/busStopData.json';
+// let busStopData = null;
 
 // console.log(busStopData);
 
@@ -23,8 +23,6 @@
 
 fetch('/data/busStopData.json')
   .then((res) => res.json())
-  .then((data) => {
-    console.log(data);
+  .then((busStopData) => {
+    console.log(busStopData);
   })
-
-// console.log(busStopData);
