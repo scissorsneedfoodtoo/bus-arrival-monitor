@@ -79,7 +79,7 @@ const executeAndSetTimeout = () => {
     });
   });
 
-  return setTimeout(executeAndSetTimeout, 30 * 1000);
+  // return setTimeout(executeAndSetTimeout, 30 * 1000);
 }
 
 module.exports = {
