@@ -1,8 +1,49 @@
 body {
-  padding: 50px;
+  padding: 15px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.display {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* grid-gap: 10px; */
+  grid-template-areas:
+    "bus-stop-name"
+    "bus-info";
+}
+
+.all-busses {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.bus-info {
+  display: grid;
+  grid-template-columns: 25% 25% 50%;
+  grid-template-areas:
+    "route-no arr-state curr-pos";
+}
+
+.bus-stop-name {
+  justify-self: stretch;
+  grid-area: bus-stop-name;
+  font-size: 3.5rem;
+}
+
+.route-no {
+  justify-self: center;
+  grid-area: route-no;
+  font-size: 2.5rem;
+}
+
+.arr-state {
+  justify-self: center;
+  grid-area: arr-state;
+  font-size: 2.5rem;
+}
+
+.curr-pos {
+  justify-self: stretch;
+  grid-area: curr-pos;
+  font-size: 2.5rem;
 }

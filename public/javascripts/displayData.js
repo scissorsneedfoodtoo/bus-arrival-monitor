@@ -5,31 +5,32 @@ fetch('/data/busStopData.json')
     const bussesArr = busStopData[0].busses;
     const busStopHTMLs = [];
 
-    // console.log(busStopData)
+    console.log(busStopData)
 
     // Construct HTML for each bus stop and push it to busStopHTMLs
     busStopData.forEach((busStop) => {
       let currBusStopHTML = "<h1 class='bus-stop-name'>" + busStop.busStopNameAndStatus + "</h1>";
+      currBusStopHTML += "<div class='all-busses'>";
 
       busStop.busses.forEach((bus) => {
-        currBusStopHTML += "<p class='bus-info'>" + bus.routeNo;
-        currBusStopHTML += ' | ' + bus.arrState;
-        currBusStopHTML += ' | ' + bus.currPos + "</p>";
+        currBusStopHTML += "<div class='bus-info'>";
+        currBusStopHTML += "<div class='route-no'>" + bus.routeNo + "</div>";
+        currBusStopHTML += "<div class='arr-state'>" + bus.arrState + "</div>";
+        currBusStopHTML += "<div class='curr-pos'>" + bus.currPos + "</div></div>";
       });
 
+      currBusStopHTML += "</div>";
       busStopHTMLs.push(currBusStopHTML);
     });
 
     // // Loop through the HTMLs in busStopHTMLs and display with a delay
-    // busStopHTMLs.forEach(function(HTML, index) {
-    //   setTimeout(function() {
-    //     display.innerHTML = HTML;
-    //   }, 10000 * index);
-    // });
+    busStopHTMLs.forEach(function(HTML, index) {
+      setTimeout(function() {
+        display.innerHTML = HTML;
+      }, 10000 * index);
+    });
 
-    console.log(busStopsHTML);
-
-    display.innerHTML = busStopsHTML[0];
-
-
+    // // For testing
+    // console.log(busStopHTMLs);
+    // display.innerHTML = busStopHTMLs[0];
   }) // end fetch / then
