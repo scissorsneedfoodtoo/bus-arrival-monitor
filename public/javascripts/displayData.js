@@ -1,9 +1,11 @@
-fetch('/data/busStopData.json')
+function displayBusData() {
+  fetch('/data/busStopData.json')
   .then((res) => res.json())
   .then((busStopData) => {
     const display = document.getElementsByClassName('display')[0];
     const bussesArr = busStopData[0].busses;
     const busStopHTMLs = [];
+    let finished = null;
 
     console.log(busStopData)
 
@@ -23,14 +25,25 @@ fetch('/data/busStopData.json')
       busStopHTMLs.push(currBusStopHTML);
     });
 
-    // // Loop through the HTMLs in busStopHTMLs and display with a delay
+    const loopCheck = [];
+
+    // Loop through the HTMLs in busStopHTMLs and display with a delay
     busStopHTMLs.forEach(function(HTML, index) {
-      setTimeout(function() {
+      setTimeout(() => {
         display.innerHTML = HTML;
+        loopCheck.push(HTML);
+        if (loopCheck.length === busStopHTMLs.length) {
+          return setTimeout(() => {
+            return displayBusData();
+          }, 10000);
+        }
       }, 10000 * index);
     });
 
     // // For testing
     // console.log(busStopHTMLs);
     // display.innerHTML = busStopHTMLs[0];
-  }) // end fetch / then
+  }); // end fetch / then
+}
+
+displayBusData();
