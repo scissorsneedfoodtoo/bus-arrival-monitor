@@ -25,24 +25,18 @@ function displayBusData() {
       busStopHTMLs.push(currBusStopHTML);
     });
 
-    const loopCheck = [];
-
     // Loop through the HTMLs in busStopHTMLs and display with a delay
     busStopHTMLs.forEach(function(HTML, index) {
       setTimeout(() => {
         display.innerHTML = HTML;
-        loopCheck.push(HTML);
-        if (loopCheck.length === busStopHTMLs.length) {
-          return setTimeout(() => {
-            return displayBusData();
-          }, 10000);
-        }
       }, 10000 * index);
     });
 
     // // For testing
     // console.log(busStopHTMLs);
     // display.innerHTML = busStopHTMLs[0];
+
+    return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
   }); // end fetch / then
 }
 
