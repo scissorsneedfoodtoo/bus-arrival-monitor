@@ -8,7 +8,7 @@ scraper.beginScraping();
 
 /* GET home page */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Bus Arrival Info Service' });
+  res.render('index', { title: 'Bus Arrival Scraper' });
 });
 
 module.exports = router;

@@ -52,10 +52,11 @@ async function scrape(url) {
 }
 
 function compareBusStopNames(a, b) {
-  if (a.busStopNameAndStatus.indexOf('경대아파트건너') > 0) {
-    return 1;
-  } else {
+  console.log(a.busStopNameAndStatus.indexOf('경대아파트건너'))
+  if (a.busStopNameAndStatus.indexOf('경대아파트건너') > -1) {
     return 0;
+  } else {
+    return 1;
   }
 }
 
