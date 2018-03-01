@@ -1,6 +1,12 @@
 function displayBusData() {
   fetch('/data/busStopData.json')
-  .then((res) => res.json())
+  .then((res) => {
+    if (!res.ok) {
+      throw Error(res.statusText);
+    }
+
+    return res.json();
+  })
   .then((busStopData) => {
     const display = document.getElementsByClassName('display')[0];
     const bussesArr = busStopData[0].busses;
@@ -37,6 +43,11 @@ function displayBusData() {
     // display.innerHTML = busStopHTMLs[0];
 
     return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
+  }).catch((error) => {
+    console.log(error);
+
+    // log error and run the program again after a delay
+    return setTimeout(displayBusData, 5000);
   }); // end fetch / then
 }
 
