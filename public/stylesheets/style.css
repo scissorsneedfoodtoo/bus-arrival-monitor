@@ -1,13 +1,14 @@
 body {
+  margin: auto;
   background-color: #363636;
-  padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Nanum Gothic Coding", monospace, Helvetica, Arial, sans-serif;
 }
 
 .display {
+  margin: 20px;
   display: grid;
-  grid-template-columns: 1fr;
-  /* grid-gap: 10px; */
+  grid-template-rows: 25% auto;
+  grid-gap: 15px;
   grid-template-areas:
     "bus-stop-name"
     "bus-info";
@@ -19,7 +20,6 @@ body {
 }
 
 .bus-info {
-  text-align: center;
   display: grid;
   grid-template-columns: 25% 25% 50%;
   grid-template-areas:
@@ -28,32 +28,43 @@ body {
 
 .bus-stop-name {
   color: hsl(0, 0%, 76%);
-  align-self: stretch;
-  justify-self: stretch;
+  align-self: center;
+  justify-self: center;
   grid-area: bus-stop-name;
-  font-size: 3.25rem;
+  font-size: 3.5em;
+  font-weight: 700;
 }
 
 .route-no {
   color: #ffac79;
   align-self: center;
-  justify-self: stretch;
+  justify-self: center;
   grid-area: route-no;
-  font-size: 2.5rem;
+  font-size: 2.75em;
 }
 
 .arr-state {
-  color: #ffac79;
+  color: #589e3c;
   align-self: center;
-  justify-self: stretch;
+  justify-self: center;
   grid-area: arr-state;
-  font-size: 2.5rem;
+  font-size: 2.75em;
+}
+
+.arr-state-chars {
+  display: inline;
+  color: #ffac79;
 }
 
 .curr-pos {
-  color: #589e3c;
+  color: #f64461;
   align-self: center;
   justify-self: left;
   grid-area: curr-pos;
-  font-size: 2.5rem;
+  font-size: 2.75em;
+}
+
+.departure {
+  display: inline;
+  color: #589e3c;
 }

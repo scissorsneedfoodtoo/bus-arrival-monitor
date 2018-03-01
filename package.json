@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "chromium-browser http://localhost:3000 --start-fullscreen & node ./bin/www",
     "test": "node ./bin/www"
   },
   "repository": {

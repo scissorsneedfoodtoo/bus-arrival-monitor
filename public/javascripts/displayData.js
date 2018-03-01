@@ -17,8 +17,8 @@ function displayBusData() {
       busStop.busses.forEach((bus) => {
         currBusStopHTML += "<div class='bus-info'>";
         currBusStopHTML += "<div class='route-no'>" + bus.routeNo + "</div>";
-        currBusStopHTML += "<div class='arr-state'>" + bus.arrState + "</div>";
-        currBusStopHTML += "<div class='curr-pos'>" + bus.currPos + "</div></div>";
+        currBusStopHTML += "<div class='arr-state'>" + styleArrState(bus.arrState) + "</div>";
+        currBusStopHTML += "<div class='curr-pos'>" + styleCurrPos(bus.currPos) + "</div></div>";
       });
 
       currBusStopHTML += "</div>";
@@ -38,6 +38,43 @@ function displayBusData() {
 
     return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
   }); // end fetch / then
+}
+
+function styleArrState(str) {
+  const testArr = str.split('');
+  let numStr = "";
+  let charStr = "<div class='arr-state-chars'>";
+
+  testArr.forEach((char) => {
+
+    // check for characters that are numbers and style the following characters for the bus arrival time
+    if (Number.isInteger(parseInt(char))) {
+      numStr += char;
+    } else {
+      charStr += char;
+    }
+  });
+
+  charStr += "</div>"
+  numStr += charStr;
+
+  return numStr;
+}
+
+function styleCurrPos(str) {
+  const wordArr = str.split(' ');
+  let finalStr = "";
+
+  // console.log(testStr);
+  wordArr.forEach((word) => {
+    if (word === "출발") {
+      finalStr += "<div class='departure'>" + word + "</div>";
+    } else {
+      finalStr += word;
+    }
+  });
+
+  return finalStr;
 }
 
 displayBusData();
