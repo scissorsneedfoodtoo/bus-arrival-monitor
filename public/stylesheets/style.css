@@ -31,7 +31,7 @@ body {
   align-self: center;
   justify-self: center;
   grid-area: bus-stop-name;
-  font-size: 3.25rem;
+  font-size: 3.5em;
   font-weight: 700;
 }
 
@@ -40,21 +40,31 @@ body {
   align-self: center;
   justify-self: center;
   grid-area: route-no;
-  font-size: 2.5rem;
+  font-size: 2.75em;
 }
 
 .arr-state {
-  color: #ffac79;
+  color: #589e3c;
   align-self: center;
   justify-self: center;
   grid-area: arr-state;
-  font-size: 2.5rem;
+  font-size: 2.75em;
+}
+
+.arr-state-chars {
+  display: inline;
+  color: #ffac79;
 }
 
 .curr-pos {
-  color: #589e3c;
+  color: #f64461;
   align-self: center;
   justify-self: left;
   grid-area: curr-pos;
-  font-size: 2.5rem;
+  font-size: 2.75em;
+}
+
+.departure {
+  display: inline;
+  color: #589e3c;
 }
