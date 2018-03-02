@@ -20,7 +20,8 @@ async function scrapeBusStop(url) {
   const constructBusStopObj = await page.evaluate(() => {
     // fetches a NodeList of busses that are scheduled to arrive
     const busses = document.querySelectorAll('#ct > div.dp > ul li');
-    const bussesRunning = busses[0].textContent !== '버스운행시간이 아닙니다.';
+    let bussesRunning = document.querySelector('#ct > div.dp > ul > li > span').innerText;
+    bussesRunning = bussesRunning !== '버스운행시간이 아닙니다.' && bussesRunning !== '현 정류소에서 10정류소 이내에 있는 버스의 노선만 조회됩니다.';
 
     let busStopObj = {
       busStopNameAndStatus: document.querySelector('#ct > div.dp > div > h3').innerText,
