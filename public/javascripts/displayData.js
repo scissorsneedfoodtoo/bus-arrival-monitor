@@ -45,7 +45,7 @@ function displayBusData() {
     // return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
     return refreshDisplay(10000 * busStopHTMLs.length);
   }).catch((error) => {
-    console.log(error);
+    // console.log(error);
 
     // run the program again after a brief delay
     // return setTimeout(displayBusData, 5000);
