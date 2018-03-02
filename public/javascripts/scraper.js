@@ -78,7 +78,7 @@ const startLoopAndWriteJSON = () => {
     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
 
     // Do stuff here!
-    console.log(orderedBusArrivalInfo);
+    // console.log(orderedBusArrivalInfo);
     return fs.writeFile('public/data/busStopData.json', JSON.stringify(orderedBusArrivalInfo), (err) => {
       if (err) throw err;
     });
