@@ -13,7 +13,7 @@ function displayBusData() {
     const busStopHTMLs = [];
     let finished = null;
 
-    console.log(busStopData)
+    // console.log(busStopData)
 
     // Construct HTML for each bus stop and push it to busStopHTMLs
     busStopData.forEach((busStop) => {
