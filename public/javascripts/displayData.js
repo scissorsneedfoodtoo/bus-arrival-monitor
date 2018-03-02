@@ -42,14 +42,25 @@ function displayBusData() {
     // console.log(busStopHTMLs);
     // display.innerHTML = busStopHTMLs[0];
 
-    return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
+    // return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
+    return refreshDisplay(10000 * busStopHTMLs.length);
   }).catch((error) => {
     console.log(error);
 
-    // log error and run the program again after a delay
-    return setTimeout(displayBusData, 5000);
+    // run the program again after a brief delay
+    // return setTimeout(displayBusData, 5000);
+    return refreshDisplay(1000);
   }); // end fetch / then
 }
+
+let refreshTimer;
+
+function refreshDisplay(delay) {
+  clearTimeout(refreshTimer);
+
+  return refreshTimer = setTimeout(displayBusData, delay);
+}
+
 
 function styleArrState(str) {
   const testArr = str.split('');

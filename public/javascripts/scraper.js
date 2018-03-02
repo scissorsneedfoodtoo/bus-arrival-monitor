@@ -7,7 +7,7 @@ const busStopURLs = [
 ]
 let busArrivalInfo = [];
 
-async function scrape(url) {
+async function scrapeBusStop(url) {
 
   const browser = await puppeteer.launch({
     // executablePath: '/usr/bin/chromium-browser', // uncomment for Raspberry Pi --> https://github.com/GoogleChrome/puppeteer/issues/550
@@ -65,24 +65,28 @@ async function runAsync() {
   busArrivalInfo = [];
 
   await Promise.all(busStopURLs.map((url) => {
-    return scrape(url);
+    return scrapeBusStop(url);
   }));
 }
 
-const executeAndSetTimeout = () => {
+let loopTimer;
+
+const startLoopAndWriteJSON = () => {
+  clearTimeout(loopTimer);
+
   runAsync().then(() => {
     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
 
     // Do stuff here!
-    // console.log(orderedBusArrivalInfo);
+    console.log(orderedBusArrivalInfo);
     return fs.writeFile('public/data/busStopData.json', JSON.stringify(orderedBusArrivalInfo), (err) => {
       if (err) throw err;
     });
   });
 
-  return setTimeout(executeAndSetTimeout, 30 * 1000);
+  return loopTimer = setTimeout(startLoopAndWriteJSON, 30 * 1000);
 }
 
 module.exports = {
-  beginScraping: executeAndSetTimeout
+  beginScraping: startLoopAndWriteJSON
 }
