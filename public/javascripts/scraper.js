@@ -10,7 +10,7 @@ let busArrivalInfo = [];
 async function scrapeBusStop(url) {
 
   const browser = await puppeteer.launch({
-    // executablePath: '/usr/bin/chromium-browser', // uncomment for Raspberry Pi --> https://github.com/GoogleChrome/puppeteer/issues/550
+    executablePath: '/usr/bin/chromium-browser', // uncomment for Raspberry Pi --> https://github.com/GoogleChrome/puppeteer/issues/550
     headless: true, // these following args might not be necessary
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
