@@ -32,7 +32,7 @@ function displayBusData() {
     });
 
     // Loop through the HTMLs in busStopHTMLs and display with a delay
-    busStopHTMLs.forEach(function(HTML, index) {
+    busStopHTMLs.forEach((HTML, index) => {
       setTimeout(() => {
         display.innerHTML = HTML;
       }, 10000 * index);
