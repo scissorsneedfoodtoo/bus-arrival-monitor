@@ -18,29 +18,33 @@ async function scrapeBusStop(url) {
 
   const constructBusStopObj = await page.evaluate(() => {
     // fetches a NodeList of busses that are scheduled to arrive
-    const busses = document.querySelectorAll('#ct > div.dp > ul li');
-    let bussesRunning = document.querySelector('#ct > div.dp > ul > li > span').innerText;
-    bussesRunning = bussesRunning !== '버스운행시간이 아닙니다.' && bussesRunning !== '현 정류소에서 10정류소 이내에 있는 버스의 노선만 조회됩니다.';
-
     let busStopObj = {
       busStopNameAndStatus: document.querySelector('#ct > div.dp > div > h3').innerText,
       busses: []
     };
+    const busses = document.querySelectorAll('#ct > div.dp > ul li');
 
-    if (bussesRunning) {
-      // loop through the busses NodeList and create an object for each bus
-      for (let bus of busses) {
-        let currBus = {
-          routeNo: bus.childNodes[0].textContent,
-          arrState: bus.childNodes[1].textContent,
-          currPos: bus.childNodes[2].textContent,
-          urgent: bus.outerHTML.match(/class="st"/) ? true : false // check the outerHTML string for a unique class for a nearby bus and style red later
-        };
+    try {
+      let bussesRunning = document.querySelector('#ct > div.dp > ul > li > span').innerText;
+      bussesRunning = bussesRunning !== '버스운행시간이 아닙니다.' && bussesRunning !== '현 정류소에서 10정류소 이내에 있는 버스의 노선만 조회됩니다.';
 
-        // push the bus object to the busses array of busStopObj
-        busStopObj.busses.push(currBus);
-      } // end for bus of busses
-    }
+      if (bussesRunning) {
+        // loop through the busses NodeList and create an object for each bus
+        for (let bus of busses) {
+          let currBus = {
+            routeNo: bus.childNodes[0].textContent,
+            arrState: bus.childNodes[1].textContent,
+            currPos: bus.childNodes[2].textContent,
+            urgent: bus.outerHTML.match(/class="st"/) ? true : false // check the outerHTML string for a unique class for a nearby bus and style red later
+          };
+
+          // push the bus object to the busses array of busStopObj
+          busStopObj.busses.push(currBus);
+        } // end for bus of busses
+      } // end if bussesRunning
+    } catch(err) {
+      console.log(err)
+    } // end try / catch
 
     return busStopObj;
   }); // end constructBusStopObj
