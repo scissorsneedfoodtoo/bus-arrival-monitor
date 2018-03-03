@@ -11,9 +11,6 @@ function displayBusData() {
     const display = document.getElementsByClassName('display')[0];
     const bussesArr = busStopData[0].busses;
     const busStopHTMLs = [];
-    let finished = null;
-
-    // console.log(busStopData)
 
     // Construct HTML for each bus stop and push it to busStopHTMLs
     busStopData.forEach((busStop) => {
@@ -47,9 +44,6 @@ function displayBusData() {
 } // end displayBusData
 
 function refreshBusData(delay) {
-  // setTimeout(() => {
-  //   return window.location.reload(true);
-  // }, delay);
   return setTimeout(displayBusData, delay);
 }
 
@@ -79,7 +73,6 @@ function styleCurrPos(str) {
   const wordArr = str.split(' ');
   let finalStr = "";
 
-  // console.log(testStr);
   wordArr.forEach((word) => {
     if (word === "출발") {
       finalStr += "<div class='departure'>" + word + "</div>";

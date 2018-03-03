@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-// const fs = require('file-system');
 
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
@@ -53,7 +52,6 @@ async function scrapeBusStop(url) {
 }
 
 function compareBusStopNames(a, b) {
-  // console.log(a.busStopNameAndStatus.indexOf('경대아파트건너'))
   if (a.busStopNameAndStatus.indexOf('경대아파트건너') > -1) {
     return 0;
   } else {
