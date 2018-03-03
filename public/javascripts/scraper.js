@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const fs = require('file-system');
+// const fs = require('file-system');
 
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
@@ -49,7 +49,7 @@ async function scrapeBusStop(url) {
   await page.close();
   await browser.close();
 
-  busArrivalInfo.push(constructBusStopObj);
+  return busArrivalInfo.push(constructBusStopObj);
 }
 
 function compareBusStopNames(a, b) {
@@ -61,33 +61,25 @@ function compareBusStopNames(a, b) {
   }
 }
 
-async function runAsync() {
-  // clear busArrivalInfo if this is not the first time the program is running
-  busArrivalInfo = [];
-
+async function startScraper() {
   await Promise.all(busStopURLs.map((url) => {
     return scrapeBusStop(url);
   }));
 }
 
-let loopTimer;
+function returnJSON() {
+  // clear busArrivalInfo if this is not the first time the program is running
+  busArrivalInfo = [];
 
-const startLoopAndWriteJSON = () => {
-  clearTimeout(loopTimer);
-
-  runAsync().then(() => {
+  return startScraper().then(() => {
     const orderedBusArrivalInfo = busArrivalInfo.sort(compareBusStopNames);
 
     // Do stuff here!
     // console.log(orderedBusArrivalInfo);
-    return fs.writeFile('public/data/busStopData.json', JSON.stringify(orderedBusArrivalInfo), (err) => {
-      if (err) throw err;
-    });
+    return JSON.stringify(orderedBusArrivalInfo);
   });
-
-  return loopTimer = setTimeout(startLoopAndWriteJSON, 30 * 1000);
 }
 
 module.exports = {
-  beginScraping: startLoopAndWriteJSON
+  fetchBusStopData: returnJSON
 }
