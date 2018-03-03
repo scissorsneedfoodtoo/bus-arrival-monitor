@@ -38,18 +38,19 @@ function displayBusData() {
       }, 10000 * index);
     });
 
-    return reloadPage(10000 * busStopHTMLs.length);
+    return refreshBusData(10000 * busStopHTMLs.length);
   }).catch((error) => {
     console.log(error);
 
-    return reloadPage(5000);
+    return refreshBusData(5000);
   }); // end fetch / then
 } // end displayBusData
 
-function reloadPage(delay) {
-  setTimeout(() => {
-    return window.location.reload(true);
-  }, delay);
+function refreshBusData(delay) {
+  // setTimeout(() => {
+  //   return window.location.reload(true);
+  // }, delay);
+  return setTimeout(displayBusData, delay);
 }
 
 
