@@ -1,5 +1,5 @@
 function displayBusData() {
-  fetch('http://localhost:3000/bus-stop-info')
+  fetch('http://localhost:3000/bus-stop-data')
   .then((res) => {
     if (!res.ok) {
       throw Error(res.statusText);

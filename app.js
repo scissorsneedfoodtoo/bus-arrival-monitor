@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
-const busInfo = require('./routes/busInfo');
+const busStopData = require('./routes/busStopData');
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/bus-stop-info', busInfo);
+app.use('/bus-stop-data', busStopData);
 
 // ignore favicon
 app.get('/favicon.ico', (req, res) => {
