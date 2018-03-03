@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/bus-info', busInfo);
+app.use('/bus-stop-info', busInfo);
 
 // ignore favicon
 app.get('/favicon.ico', (req, res) => {

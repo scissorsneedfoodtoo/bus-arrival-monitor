@@ -4,8 +4,8 @@ const scraper = require('../public/javascripts/scraper.js');
 
 /* GET bus-info */
 router.get('/', (req, res) => {
-  scraper.beginScraping().then((busData) => {
-    res.send(busData);
+  scraper.fetchBusStopData().then((busStopData) => {
+    res.send(busStopData);
   });
 });
 

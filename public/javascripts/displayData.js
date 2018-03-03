@@ -1,5 +1,5 @@
 function displayBusData() {
-  fetch('/data/busStopData.json')
+  fetch('http://localhost:3000/bus-stop-info')
   .then((res) => {
     if (!res.ok) {
       throw Error(res.statusText);
@@ -38,27 +38,18 @@ function displayBusData() {
       }, 10000 * index);
     });
 
-    // // For testing
-    // console.log(busStopHTMLs);
-    // display.innerHTML = busStopHTMLs[0];
-
-    // return setTimeout(displayBusData, 10000 * busStopHTMLs.length);
-    return refreshDisplay(10000 * busStopHTMLs.length);
+    return reloadPage(10000 * busStopHTMLs.length);
   }).catch((error) => {
-    // console.log(error);
+    console.log(error);
 
-    // run the program again after a brief delay
-    // return setTimeout(displayBusData, 5000);
-    return refreshDisplay(1000);
+    return reloadPage(5000);
   }); // end fetch / then
-}
+} // end displayBusData
 
-let refreshTimer;
-
-function refreshDisplay(delay) {
-  clearTimeout(refreshTimer);
-
-  return refreshTimer = setTimeout(displayBusData, delay);
+function reloadPage(delay) {
+  setTimeout(() => {
+    return window.location.reload(true);
+  }, delay);
 }
 
 
@@ -81,7 +72,7 @@ function styleArrState(str) {
   numStr += charStr;
 
   return numStr;
-}
+} // end styleArrState
 
 function styleCurrPos(str) {
   const wordArr = str.split(' ');
@@ -97,6 +88,6 @@ function styleCurrPos(str) {
   });
 
   return finalStr;
-}
+} // end styleCurrPos
 
 displayBusData();

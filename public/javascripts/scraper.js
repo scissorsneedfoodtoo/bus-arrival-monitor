@@ -49,7 +49,7 @@ async function scrapeBusStop(url) {
   await page.close();
   await browser.close();
 
-  busArrivalInfo.push(constructBusStopObj);
+  return busArrivalInfo.push(constructBusStopObj);
 }
 
 function compareBusStopNames(a, b) {
@@ -81,5 +81,5 @@ function returnJSON() {
 }
 
 module.exports = {
-  beginScraping: returnJSON
+  fetchBusStopData: returnJSON
 }
