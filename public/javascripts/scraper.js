@@ -10,7 +10,6 @@ async function scrapeBusStop(url) {
 
   const browser = await puppeteer.launch({
     executablePath: '/usr/bin/chromium-browser', // uncomment for Raspberry Pi --> https://github.com/GoogleChrome/puppeteer/issues/550
-    headless: true, // these following args might not be necessary
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
@@ -64,7 +63,7 @@ function compareBusStopNames(a, b) {
 }
 
 async function startScraper() {
-  await Promise.all(busStopURLs.map((url) => {
+  return await Promise.all(busStopURLs.map((url) => {
     return scrapeBusStop(url);
   }));
 }
