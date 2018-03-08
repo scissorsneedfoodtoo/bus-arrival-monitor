@@ -25,8 +25,8 @@
     "file-system": "^2.2.2",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
-    "pug": "^2.0.0-rc.4",
-    "puppeteer": "^1.1.0"
+    "pug": "^2.0.0",
+    "puppeteer": "^1.1.1"
   },
   "devDependencies": {}
 }
