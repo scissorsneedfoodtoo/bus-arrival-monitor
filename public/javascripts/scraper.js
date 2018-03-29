@@ -1,9 +1,8 @@
 const puppeteer = require('puppeteer');
 
 const busStopURLs = [
-  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
-  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
-]
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7061017500&bsNm=%C8%B2%B1%DD%BF%EC%B9%E61%C2%F7%B0%C7%B3%CA' // 황금우방1차건너
+];
 let busArrivalInfo = [];
 
 async function scrapeBusStop(url) {
@@ -46,7 +45,7 @@ async function scrapeBusStop(url) {
     } // end try / finally
   }); // end constructBusStopObj
 
-  busArrivalInfo.push(constructBusStopObj);
+  await busArrivalInfo.push(constructBusStopObj);
 
   await page.close();
   await browser.close();
