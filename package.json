@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "chromium-browser --start-fullscreen --noerordialogs --disable-infobars --incognito --disable-translate --disable-cache http://localhost:3000 & node --max-old-space-size=128 --max-semi-space-size=1 ./bin/www",
+    "start": "chromium-browser --start-fullscreen --noerordialogs --disable-infobars --incognito --disable-translate --disable-cache --force-device-scale-factor=0.97 http://localhost:3000 https://dakboard.com/app?p=YOUR_PRIVATE_URL & node --max-old-space-size=128 --max-semi-space-size=1 ./bin/www",
     "test": "node ./bin/www"
   },
   "repository": {
@@ -21,12 +21,12 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "debug": "^3.1.0",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "file-system": "^2.2.2",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
-    "pug": "^2.0.0",
-    "puppeteer": "^1.1.1"
+    "pug": "^2.0.3",
+    "puppeteer": "^1.2.0"
   },
   "devDependencies": {}
 }
