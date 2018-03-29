@@ -41,17 +41,15 @@ async function scrapeBusStop(url) {
           busStopObj.busses.push(currBus);
         } // end for bus of busses
       } // end if bussesRunning
-    } catch(err) {
-      console.log(err)
-    } // end try / catch
-
-    return busStopObj;
+    } finally {
+      return busStopObj;
+    } // end try / finally
   }); // end constructBusStopObj
+
+  busArrivalInfo.push(constructBusStopObj);
 
   await page.close();
   await browser.close();
-
-  return busArrivalInfo.push(constructBusStopObj);
 }
 
 function compareBusStopNames(a, b) {
