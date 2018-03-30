@@ -45,7 +45,7 @@ async function scrapeBusStop(url) {
     } // end try / finally
   }); // end constructBusStopObj
 
-  await busArrivalInfo.push(constructBusStopObj);
+  busArrivalInfo.push(constructBusStopObj);
 
   await page.close();
   await browser.close();
