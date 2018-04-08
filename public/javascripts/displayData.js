@@ -35,14 +35,14 @@ function displayBusData() {
       }, 10000 * index);
     });
 
-    return refreshBusData(10000 * busStopHTMLs.length);
+    refreshBusData(10000 * busStopHTMLs.length);
   }).catch((error) => {
-    return refreshBusData(5000);
+    refreshBusData(5000);
   }); // end fetch / then
 } // end displayBusData
 
 function refreshBusData(delay) {
-  return setTimeout(displayBusData, delay);
+  setTimeout(displayBusData, delay);
 }
 
 
