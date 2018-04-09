@@ -10,8 +10,8 @@ function displayBusData() {
 
     return res.json();
   })
-  .then((res) => {
-    busStopData = res;
+  .then((data) => {
+    busStopData = data;
     const display = document.getElementsByClassName('display')[0];
 
     // Construct HTML for each bus stop and push it to busStopHTMLs
