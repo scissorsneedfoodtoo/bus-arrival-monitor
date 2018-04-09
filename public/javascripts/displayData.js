@@ -1,4 +1,5 @@
 let busStopData;
+let busStopHTMLs = [];
 
 function displayBusData() {
   fetch('http://localhost:3000/bus-stop-data')
@@ -12,8 +13,6 @@ function displayBusData() {
   .then((res) => {
     busStopData = res;
     const display = document.getElementsByClassName('display')[0];
-    // const bussesArr = busStopData[0].busses;
-    const busStopHTMLs = [];
 
     // Construct HTML for each bus stop and push it to busStopHTMLs
     busStopData.forEach((busStop) => {
@@ -46,6 +45,7 @@ function displayBusData() {
 
 function refreshBusData(delay) {
   busStopData = null;
+  busStopHTMLs = [];
   setTimeout(displayBusData, delay);
 }
 
