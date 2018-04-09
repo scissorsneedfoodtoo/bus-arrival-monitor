@@ -46,6 +46,7 @@ async function scrapeBusStop(url) {
 
   busArrivalInfo.push(constructBusStopObj);
 
+  await page.goto('about:blank'); // used to free memory before closing the page and browser
   await page.close();
   await browser.close();
 }
