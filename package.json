@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "chromium-browser --start-fullscreen --noerordialogs --disable-infobars --incognito --disable-translate --disable-cache --force-device-scale-factor=0.97 http://localhost:3000 https://dakboard.com/app?p=YOUR_PRIVATE_URL & node --max-old-space-size=128 --max-semi-space-size=1 ./bin/www",
+    "start": "chromium-browser --start-fullscreen --noerordialogs --disable-infobars --incognito --disable-translate --disable-cache http://localhost:3000 & node --optimize_for_size --max_old_space_size=128 --gc_interval=100 --max_semi_space_size=1 ./bin/www",
     "test": "node ./bin/www"
   },
   "repository": {
