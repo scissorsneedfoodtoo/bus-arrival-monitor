@@ -1,5 +1,6 @@
 let busStopData;
 let busStopHTMLs = [];
+const display = document.getElementsByClassName('display')[0];
 
 function displayBusData() {
   fetch('http://localhost:3000/bus-stop-data')
@@ -12,7 +13,6 @@ function displayBusData() {
   })
   .then((data) => {
     busStopData = data;
-    const display = document.getElementsByClassName('display')[0];
 
     // Construct HTML for each bus stop and push it to busStopHTMLs
     busStopData.forEach((busStop) => {
