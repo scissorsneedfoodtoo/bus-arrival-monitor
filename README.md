@@ -1,5 +1,4 @@
 # bus-arrival-monitor
-![Screenshot](docs/images/bus-arrival-monitor.jpg)
 <div align="center">
   <img width="400" height="300" src="https://github.com/scissorsneedfoodtoo/bus-arrival-monitor/blob/update-readme/docs/images/bus-arrival-monitor.jpg">
 </div>
@@ -15,8 +14,8 @@ Go to [this website](http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfoMain) an
 
 ```js
 const busStopURLs = [
-'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
-'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
 ];
 ```
 
@@ -25,6 +24,6 @@ Data from each bus stop in the array will be scraped every `10 * busStopURLs.len
 ### Possible issues
 This was meant to run on a Raspberry Pi running Raspbian where Chromium is installed by default. If you experience an error running the app after using the following commands, try updating or (re)installing Chromium and try `npm start` again.
 
-Also, due to Puppeteer requiring a relatively new version of Chromium, there were some issues with the latest version in the Raspbian repository. This may or may not be an issue now, but if so, see [this page](https://github.com/GoogleChrome/puppeteer/issues/550) for more information about building a more recent version of Chromium and getting Puppeteer to run on a Raspberry Pi.
+Also, due to Puppeteer requiring a relatively new version of Chromium, there were some issues with the latest version in the Raspbian repository. This may or may not be a problem now, but if so, see [this page](https://github.com/GoogleChrome/puppeteer/issues/550) for more information about building a more recent version of Chromium and getting Puppeteer to run on a Raspberry Pi.
 
 Finally, if you change the bus stops in the `busStopURLs` array there is a fair chance that the data will not be displayed in the order you want it to be. This is due to the asynchronous nature of JavaScript and follows best practices of preferring non-blocking code to blocking, synchronous code. Simply modify the [compareBusStopNames](https://github.com/scissorsneedfoodtoo/bus-arrival-monitor/blob/ac960e006ba3a957d4e25039e191b41b950217cd/public/javascripts/scraper.js#L54) function in [public/javascripts/sraper.js](https://github.com/scissorsneedfoodtoo/bus-arrival-monitor/blob/master/public/javascripts/scraper.js) to display the bus stops in the desired order.
