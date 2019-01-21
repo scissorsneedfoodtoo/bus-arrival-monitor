@@ -39,6 +39,7 @@ function displayBusData() {
 
     refreshBusData(10000 * busStopHTMLs.length);
   }).catch((error) => {
+    console.error(error);
     refreshBusData(5000);
   }); // end fetch / then
 } // end displayBusData
