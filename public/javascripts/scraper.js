@@ -11,7 +11,14 @@ async function scrapeBusStop(url) {
     executablePath: '/usr/bin/chromium-browser' // uncomment for Raspberry Pi --> https://github.com/GoogleChrome/puppeteer/issues/550
   });
   const page = await browser.newPage();
-  await page.goto(url);
+  
+  try {
+    await page.goto(url);
+  } catch (err) {
+    // console.log(err);
+    await page.close();
+    return await browser.close(); // return to break out of function and prevent an endless stream of error msgs if internet is disconnected
+  }
 
   const constructBusStopObj = await page.evaluate(() => {
     // fetches a NodeList of busses that are scheduled to arrive
