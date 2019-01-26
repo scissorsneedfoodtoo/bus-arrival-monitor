@@ -1,6 +1,6 @@
 # bus-arrival-monitor
 <div align="center">
-  <img width="400" height="300" src="https://github.com/scissorsneedfoodtoo/bus-arrival-monitor/blob/update-readme/docs/images/bus-arrival-monitor.jpg">
+  <img width="400" height="300" src="https://github.com/scissorsneedfoodtoo/bus-arrival-monitor/blob/master/docs/images/bus-arrival-monitor.jpg">
 </div>
 
 An Express app designed to run on a Raspberry Pi that scrapes bus data for Daegu, South Korea, serves it as an API, and displays the arrival times on a website through a mini HDMI display.
