@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
@@ -11,14 +11,7 @@ async function scrapeBusStop(url) {
     executablePath: '/usr/bin/chromium-browser' // uncomment for Raspberry Pi --> https://github.com/GoogleChrome/puppeteer/issues/550
   });
   const page = await browser.newPage();
-  
-  try {
-    await page.goto(url);
-  } catch (err) {
-    // console.log(err);
-    await page.close();
-    return await browser.close(); // return to break out of function and prevent an endless stream of error msgs if internet is disconnected
-  }
+  await page.goto(url);
 
   const constructBusStopObj = await page.evaluate(() => {
     // fetches a NodeList of busses that are scheduled to arrive
@@ -69,7 +62,7 @@ function compareBusStopNames(a, b) {
 async function startScraper() {
   return await Promise.all(busStopURLs.map((url) => {
     return scrapeBusStop(url);
-  })).catch(err => console.error(err));
+  }));
 }
 
 function returnJSON() {
