@@ -19,7 +19,7 @@ async function scrapeBusStop(url) {
       busStopNameAndStatus: document.querySelector('#ct > div.dp > div > h3').innerText,
       busses: []
     };
-    const busses = document.querySelectorAll('#ct > div.dp > ul li');
+    const scrapedBusses = document.querySelectorAll('#ct > div.dp > ul li');
 
     try {
       let bussesRunning = document.querySelector('#ct > div.dp > ul > li > span').innerText;
@@ -27,12 +27,12 @@ async function scrapeBusStop(url) {
 
       if (bussesRunning) {
         // loop through the busses NodeList and create an object for each bus
-        for (let bus of busses) {
+        for (let bus of scrapedBusses) {
           let currBus = {
-            routeNo: bus.childNodes[0].textContent,
-            arrState: bus.childNodes[1].textContent,
-            currPos: bus.childNodes[2].textContent,
-            urgent: bus.outerHTML.match(/class="st"/) ? true : false // check the outerHTML string for a unique class for a nearby bus and style red later
+            routeNo: bus.getElementsByClassName('marquee')[0].textContent,
+            arrState: bus.getElementsByClassName('arr_state')[0].textContent,
+            currPos: bus.getElementsByClassName('cur_pos')[0].textContent,
+            urgent: bus.classList[0] === 'st' ? true : false // check the outerHTML string for a unique class for a nearby bus and style red later
           };
 
           // push the bus object to the busses array of busStopObj

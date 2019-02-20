@@ -22,7 +22,7 @@ function displayBusData() {
       busStop.busses.forEach((bus) => {
         currBusStopHTML += "<div class='bus-info'>";
         currBusStopHTML += "<div class='route-no'>" + bus.routeNo + "</div>";
-        currBusStopHTML += "<div class='arr-state'>" + styleArrState(bus.arrState) + "</div>";
+        currBusStopHTML += "<div class='arr-state'>" + styleArrState(bus.arrState, bus.urgent) + "</div>";
         currBusStopHTML += "<div class='curr-pos'>" + styleCurrPos(bus.currPos) + "</div></div>";
       });
 
@@ -51,10 +51,11 @@ function refreshBusData(delay) {
 }
 
 
-function styleArrState(str) {
-  const testArr = str.split('');
+function styleArrState(arrState, isUrgent) {
+  const testArr = arrState.split('');
   let numStr = "";
-  let charStr = "<div class='arr-state-chars'>";
+  let charStr;
+  isUrgent ? charStr = "<div class='arr-state-chars urgent'>" : charStr = "<div class='arr-state-chars'>";
 
   testArr.forEach((char) => {
 
