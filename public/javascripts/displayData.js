@@ -45,8 +45,14 @@ function displayBusData() {
 } // end displayBusData
 
 function refreshBusData(delay) {
+  // clean up
   busStopData = null;
   busStopHTMLs = [];
+
+  while (display.hasChildNodes()) {
+    display.removeChild(display.lastChild);
+  }
+
   setTimeout(displayBusData, delay);
 }
 
