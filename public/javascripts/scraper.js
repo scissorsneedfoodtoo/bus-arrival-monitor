@@ -62,7 +62,9 @@ function compareBusStopNames(a, b) {
 async function startScraper() {
   return await Promise.all(busStopURLs.map((url) => {
     return scrapeBusStop(url);
-  }));
+  })).catch(err => {
+    console.error(err);
+  });
 }
 
 function returnJSON() {
