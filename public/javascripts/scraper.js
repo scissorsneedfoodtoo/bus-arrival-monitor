@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
+const randomUA = require('./randomUA.js');
 const busStopURLs = [
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
   'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
@@ -8,7 +9,11 @@ const busStopURLs = [
 let busArrivalInfo = [];
 
 async function scrapeBusStop(url) {
-  const html = await fetch(url)
+  const html = await fetch(url, {
+    headers: {
+      'User-Agent': randomUA()
+    }
+  })
     .then(res => res.textConverted())
     .then(body => body);
   const dom = new JSDOM(html);
