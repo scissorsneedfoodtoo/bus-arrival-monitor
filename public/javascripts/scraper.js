@@ -3,8 +3,8 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const randomUA = require('./randomUA.js');
 const busStopURLs = [
-  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010100&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%B0%C7%B3%CA', // kyungdaeAptCorner
-  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7011010200&bsNm=%B0%E6%B4%EB%BE%C6%C6%C4%C6%AE%BE%D5' //kyungdaeAptFront
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7061005000&bsNm=%B9%FD%BF%F8%BE%D5', // in front of court
+  'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7061003600&bsNm=%B1%D7%B7%A3%B5%E5%C8%A3%C5%DA%BE%D5' // in front of grand hotel
 ];
 let busArrivalInfo = [];
 
@@ -47,7 +47,7 @@ async function scrapeBusStop(url) {
 }
 
 function compareBusStopNames(a, b) {
-  if (a.busStopNameAndStatus.indexOf('경대아파트건너') > -1) {
+  if (a.busStopNameAndStatus.includes('그랜드호텔앞')) { // show grand hotel first
     return 0;
   } else {
     return 1;
