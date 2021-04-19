@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "chromium-browser --start-fullscreen --noerordialogs --disable-infobars --incognito --disable-translate --disable-cache http://localhost:3000 & node --optimize_for_size --max_old_space_size=128 --gc_interval=100 --max_semi_space_size=1 ./bin/www",
+    "start": "chromium --start-fullscreen --noerordialogs --disable-infobars --incognito --disable-translate --disable-cache http://localhost:3000 & node --optimize_for_size --max_old_space_size=128 --gc_interval=100 --max_semi_space_size=1 ./bin/www",
     "test": "node ./bin/www"
   },
   "repository": {
@@ -28,7 +28,7 @@
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7",
-    "pug": "^2.0.4"
-  },
-  "devDependencies": {}
+    "pug": "^2.0.4",
+    "puppeteer": "^8.0.0"
+  }
 }
