@@ -1,6 +1,3 @@
-// const fetch = require('node-fetch');
-// const jsdom = require('jsdom');
-// const { JSDOM } = jsdom;
 const randomUA = require('./randomUA.js');
 const busStopURLs = [
   'https://businfo.daegu.go.kr:8095/dbms_web/map?searchText=%EB%B2%95%EC%9B%90%EC%95%9E&wincId=09089', // in front of court

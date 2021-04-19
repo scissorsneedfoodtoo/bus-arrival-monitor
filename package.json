@@ -23,12 +23,10 @@
     "debug": "^3.2.6",
     "encoding": "^0.1.12",
     "express": "^4.17.1",
-    "file-system": "^2.2.2",
-    "jsdom": "^13.2.0",
+    "file-system": "^1.2.2",
     "morgan": "^1.9.1",
-    "node-fetch": "^2.6.1",
     "path": "^0.12.7",
-    "pug": "^2.0.4",
+    "pug": "^3.0.2",
     "puppeteer": "^8.0.0"
   }
 }
