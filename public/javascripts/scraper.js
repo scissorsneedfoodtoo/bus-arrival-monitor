@@ -1,3 +1,4 @@
+const puppeteer = require('puppeteer');
 const randomUA = require('./randomUA.js');
 const busStopURLs = [
   'https://businfo.daegu.go.kr:8095/dbms_web/map?searchText=%EB%B2%95%EC%9B%90%EC%95%9E&wincId=09089', // in front of court
@@ -5,11 +6,10 @@ const busStopURLs = [
 ];
 let busArrivalInfo = [];
 
-const puppeteer = require('puppeteer');
-
 async function scrapeBusStop(url) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  await page.setUserAgent(randomUA());
   await page.goto(url, { waitUntil: 'networkidle2' });
 
   try {
