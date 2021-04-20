@@ -14,7 +14,7 @@ async function scrapeBusStop(url) {
 
   try {
     const busStopObj = await page.evaluate(() => {
-      const scrapedBusses = Array.from(document.querySelectorAll("[id^='selectRoute'] .list-group-item"));
+      const scrapedBusses = Array.from(document.querySelectorAll("[id^='selectRoute'] .list-group-item")).filter((__, i) => i < 6);
 
       return {
         busStopNameAndStatus: document.querySelector('#selectBS0 > a > div.form-inline > h6').innerText,
