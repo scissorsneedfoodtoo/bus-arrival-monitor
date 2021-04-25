@@ -39,7 +39,7 @@ async function scrapeBusStop(url) {
   }
 }
 
-function compareBusStopNames(a, b) {
+function compareBusStopNames(a, __) {
   if (a.busStopNameAndStatus.includes('그랜드호텔앞')) { // show grand hotel first
     return 0;
   } else {
