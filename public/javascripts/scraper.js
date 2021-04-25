@@ -7,10 +7,14 @@ const busStopURLs = [
 let busArrivalInfo = [];
 
 async function scrapeBusStop(url) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: '/usr/bin/chromium-browser',
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
   const page = await browser.newPage();
   await page.setUserAgent(randomUA());
-  await page.goto(url, { waitUntil: 'networkidle2' });
+  await page.goto(url, { waitUntil: 'load', timeout: 0 });
 
   try {
     const busStopObj = await page.evaluate(() => {
